@@ -13,21 +13,28 @@ clientSideSocket.listen(5)
 clientsocket, address = clientSideSocket.accept()
 print("Connection has been established")
 
+
+
+
 try:
     while True:
         msg = clientsocket.recv(1024)
         print("Message has been received")
-
+        y = 65536
         #Connect with serverproxy 
         serverproxySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         serverproxySocket.connect(("stempoljos.westeurope.cloudapp.azure.com", 8092))
 
         #Wait for PK from server
-        serverproxyPK = serverproxySocket.recv(1024)
-        serverproxyPK = serverproxyPK.decode("utf-8")
+        serverproxyPK = serverproxySocket.recv(y)
+        #serverproxyPK = serverproxyPK.decode("utf-8")
+        print(serverproxyPK)
 
         #Generate AES key
         aesKey = "000102030405060708090a0b0c0d0e0f1011121314151617"
+
+        #Generate Post Quantum Keys
+        clientproxyPublickey, clientproxyPrivatekey = Kyber.key_gen()
 
         #Encrypt AES with Post Quantum PK from server and send to serverproxy
         encryptedAesKey = Kyber.enc(serverproxyPK, m=aesKey)

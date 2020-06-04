@@ -21,9 +21,10 @@ while True:
 
     #Generate Post Quantum Keypair
     serverproxyPublickey, serverproxyPrivatekey = Kyber.key_gen()
+    #print (serverproxyPublickey)
 
     #Send Post Quantum Public key to clientproxy
-    clientproxySocket.send(bytes(serverproxyPublickey, "utf-8"))
+    clientproxySocket.send(bytes(serverproxyPublickey))
 
     #Wait for Post Quantum encrypted AES key and decrypt
     aesKey = clientproxySocket.recv(1024)

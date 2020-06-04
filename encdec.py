@@ -16,5 +16,6 @@ print (encrypted)
 decrypted = Kyber.dec(sk_server, c=encrypted)
 
 print (decrypted)
+print (pk_server)
 
 #send to port 8086
