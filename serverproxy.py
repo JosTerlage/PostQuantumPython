@@ -1,5 +1,6 @@
 import socket
 
+#Init sockets
 serverproxySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serverproxySocket.bind((socket.gethostname(), 8092))
 serverproxySocket.listen(5)
