@@ -1,4 +1,5 @@
 import socket
+import pickle
 
 from poc import MiniKyber, Kyber, Nose, Skipper2Negated, Skipper4, BinomialDistribution
 from sage.crypto.mq.rijndael_gf import RijndaelGF
@@ -26,7 +27,8 @@ try:
         serverproxySocket.connect(("stempoljos.westeurope.cloudapp.azure.com", 8092))
 
         #Wait for PK from server
-        serverproxyPK = serverproxySocket.recv(y)
+        pqDataStream = serverproxySocket.recv(y)
+        serverproxyPK = pickle.loads(pqDataStream)
         #serverproxyPK = serverproxyPK.decode("utf-8")
         print(serverproxyPK)
 

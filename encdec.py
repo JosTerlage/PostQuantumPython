@@ -11,11 +11,13 @@ pk_server, sk_server = Kyber.key_gen()
 
 encrypted = Kyber.enc(pk_server, m=message)
 
-print (encrypted)
+#print (encrypted)
 
 decrypted = Kyber.dec(sk_server, c=encrypted)
 
-print (decrypted)
-print (pk_server)
+#print (decrypted)
+#print (pk_server)
+
+print(type(pk_server))
 
 #send to port 8086

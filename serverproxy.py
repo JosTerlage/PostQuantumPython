@@ -1,4 +1,5 @@
 import socket
+import pickle
 
 from poc import MiniKyber, Kyber, Nose, Skipper2Negated, Skipper4, BinomialDistribution
 from sage.crypto.mq.rijndael_gf import RijndaelGF
@@ -24,7 +25,8 @@ while True:
     #print (serverproxyPublickey)
 
     #Send Post Quantum Public key to clientproxy
-    clientproxySocket.send(bytes(serverproxyPublickey))
+    pqDataStream = pickle.dumps(serverproxyPublickey)
+    clientproxySocket.send(bytes(pqDataStream))
 
     #Wait for Post Quantum encrypted AES key and decrypt
     aesKey = clientproxySocket.recv(1024)
