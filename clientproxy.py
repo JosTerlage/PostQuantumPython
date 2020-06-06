@@ -19,6 +19,7 @@ HEADERSIZE = 10
 
 try:
     while True:
+        serverproxyPK = ()
         msg = clientsocket.recv(1024)
         print("Message has been received")
         y = 65536
@@ -30,26 +31,26 @@ try:
         #pqDataStream = serverproxySocket.recv(y)
         full_msg = b''
         new_msg = True
-        while True:
-            msg = serverproxySocket.recv(y)
-            if new_msg:
-                #print("new msg len:",msg[:HEADERSIZE])
-                msglen = int(msg[:HEADERSIZE])
-                new_msg = False
+        
+        msg = serverproxySocket.recv(y)
+        if new_msg:
+            print("new msg len:",msg[:HEADERSIZE])
+            msglen = int(msg[:HEADERSIZE])
+            new_msg = False
 
-            #print(f"full message length: {msglen}")
+        print(f"full message length: {msglen}")
 
-            full_msg += msg
+        full_msg += msg
 
-            #print(len(full_msg))
+        print(len(full_msg))
 
-            if len(full_msg)-HEADERSIZE == msglen:
-                #print("full msg recvd")
-                #print(full_msg[HEADERSIZE:])
-                #print(pickle.loads(full_msg[HEADERSIZE:]))
-                serverproxyPK = pickle.loads(full_msg[HEADERSIZE:])
-                new_msg = True
-                full_msg = b""
+        if len(full_msg)-HEADERSIZE == msglen:
+            print("full msg recvd")
+            print(full_msg[HEADERSIZE:])
+            print(pickle.load(full_msg[HEADERSIZE:]))
+            serverproxyPK = pickle.load(full_msg[HEADERSIZE:])
+            new_msg = True
+            full_msg = b""
 
 
         #serverproxyPK = pickle.loads(pqDataStream)
