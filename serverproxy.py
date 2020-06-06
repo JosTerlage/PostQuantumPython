@@ -17,7 +17,7 @@ serversideSocket.connect((socket.gethostname(), 8094))
 while True:
     #Establish connection with clientproxy
     clientproxySocket, address = serverproxySocket.accept()
-    clientproxySocket.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 65536)
+    #clientproxySocket.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 65536)
 
     print("Tunnel has been established")
 
