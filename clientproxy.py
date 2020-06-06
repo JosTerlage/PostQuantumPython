@@ -39,7 +39,7 @@ try:
         while True:
             packet = serverproxySocket.recv(4096)
             print(packet)
-            if packet == b'1': break
+            if packet == b'00000001': break
             pqDataStream.append(packet)
         
         #pqDataStream = serverproxySocket.recv(y)
