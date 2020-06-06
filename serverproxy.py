@@ -6,6 +6,7 @@ from sage.crypto.mq.rijndael_gf import RijndaelGF
 
 rgf = RijndaelGF(4, 6)
 
+HEADERSIZE = 10
 
 #Init sockets
 serverproxySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

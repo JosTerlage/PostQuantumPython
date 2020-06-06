@@ -14,7 +14,7 @@ clientSideSocket.listen(5)
 clientsocket, address = clientSideSocket.accept()
 print("Connection has been established")
 
-
+HEADERSIZE = 10
 
 
 try:
@@ -27,8 +27,32 @@ try:
         serverproxySocket.connect(("stempoljos.westeurope.cloudapp.azure.com", 8092))
 
         #Wait for PK from server
-        pqDataStream = serverproxySocket.recv(y)
-        serverproxyPK = pickle.loads(pqDataStream)
+        #pqDataStream = serverproxySocket.recv(y)
+        full_msg = b''
+        new_msg = True
+        while True:
+            msg = serverproxySocket.recv(y)
+            if new_msg:
+                #print("new msg len:",msg[:HEADERSIZE])
+                msglen = int(msg[:HEADERSIZE])
+                new_msg = False
+
+            #print(f"full message length: {msglen}")
+
+            full_msg += msg
+
+            #print(len(full_msg))
+
+            if len(full_msg)-HEADERSIZE == msglen:
+                #print("full msg recvd")
+                #print(full_msg[HEADERSIZE:])
+                #print(pickle.loads(full_msg[HEADERSIZE:]))
+                serverproxyPK = pickle.loads(full_msg[HEADERSIZE:])
+                new_msg = True
+                full_msg = b""
+
+
+        #serverproxyPK = pickle.loads(pqDataStream)
         #serverproxyPK = serverproxyPK.decode("utf-8")
         print(serverproxyPK)
 
