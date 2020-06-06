@@ -25,6 +25,7 @@ try:
         y = 65536
         #Connect with serverproxy 
         serverproxySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        serverproxySocket.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 65536)
         serverproxySocket.connect(("stempoljos.westeurope.cloudapp.azure.com", 8092))
 
         #Wait for PK from server

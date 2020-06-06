@@ -1,3 +1,5 @@
+import pickle
+
 from poc import MiniKyber, Kyber, Nose, Skipper2Negated, Skipper4, BinomialDistribution
 
 #int pk_server
@@ -9,15 +11,21 @@ message = '10101010'
 pk_server, sk_server = Kyber.key_gen()
 
 
-encrypted = Kyber.enc(pk_server, m=message)
+#encrypted = Kyber.enc(pk_server, m=message)
 
 #print (encrypted)
 
-decrypted = Kyber.dec(sk_server, c=encrypted)
+#decrypted = Kyber.dec(sk_server, c=encrypted)
+
+dump = pickle.dumps(pk_server)
+unpack = pickle.loads(dump)
+
+print(unpack)
+
 
 #print (decrypted)
 #print (pk_server)
 
-print(type(pk_server))
+#print(type(pk_server))
 
 #send to port 8086
