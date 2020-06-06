@@ -7,6 +7,7 @@ from sage.crypto.mq.rijndael_gf import RijndaelGF
 
 #AES Block size 128, key length 256
 rgf = RijndaelGF(4, 6)
+pqPKLength = 138542
 
 #Init sockets
 clientSideSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -36,12 +37,12 @@ try:
         #Wait for PK from server
         pqDataStream = []
 
-        length = serverproxySocket.recv(4096)
-        length = int(str(length, "utf8"))
-        print(length)
-        print(type(length))
+        # length = serverproxySocket.recv(4096)
+        # length = int(str(length, "utf8"))
+        # print(length)
+        # print(type(length))
 
-        while int(len(pqDataStream)) < length:
+        while int(len(pqDataStream)) < pqPKLength:
             packet = serverproxySocket.recv(4096)
             print(packet)
             if packet == b'00000001': break
