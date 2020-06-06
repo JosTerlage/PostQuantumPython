@@ -36,7 +36,10 @@ try:
         #Wait for PK from server
         pqDataStream = []
 
-        while True:
+        length = serverproxySocket.recv(4096)
+        length = int(length.decode("utf-8"))
+
+        while int(len(pqDataStream)) < length:
             packet = serverproxySocket.recv(4096)
             print(packet)
             if packet == b'00000001': break

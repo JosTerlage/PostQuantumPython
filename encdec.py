@@ -19,8 +19,8 @@ pk_server, sk_server = Kyber.key_gen()
 
 dump = pickle.dumps(pk_server)
 unpack = pickle.loads(dump)
-
-print(unpack)
+print(type(dump))
+print(len(dump))
 
 
 #print (decrypted)

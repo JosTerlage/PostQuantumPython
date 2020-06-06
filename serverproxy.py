@@ -34,8 +34,9 @@ while True:
 
     #Send Post Quantum Public key to clientproxy
     pqDataStream = pickle.dumps(serverproxyPublickey)
+    clientproxySocket.send(bytes(len(pqDataStream), "utf-8"))
     clientproxySocket.send(pqDataStream)
-    clientproxySocket.send(b'00000001')
+    #clientproxySocket.send(b'00000001')
 
 
     #Wait for Post Quantum encrypted AES key and decrypt
