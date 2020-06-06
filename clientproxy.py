@@ -42,14 +42,15 @@ try:
         # print(length)
         # print(type(length))
 
-        while int(len(pqDataStream)) < pqPKLength:
+        while (int(len(pqDataStream))-1)*4096 <= pqPKLength:
+            #print(len(pqDataStream)*4096)
             packet = serverproxySocket.recv(4096)
-            print(packet)
-            if packet == b'00000001': break
+            #print(packet)
             pqDataStream.append(packet)
         
         #pqDataStream = serverproxySocket.recv(y)
-        print(pqDataStream)
+        #print(pqDataStream)
+        print(b"".join(pqDataStream))
         serverproxyPK = pickle.loads(b"".join(pqDataStream))
         #serverproxyPK = serverproxyPK.decode("utf-8")
         print(serverproxyPK)

@@ -30,7 +30,7 @@ while True:
 
     #Generate Post Quantum Keypair
     serverproxyPublickey, serverproxyPrivatekey = Kyber.key_gen()
-    #print (serverproxyPublickey)
+    print (serverproxyPublickey)
 
     #Send Post Quantum Public key to clientproxy
     pqDataStream = pickle.dumps(serverproxyPublickey)
