@@ -37,7 +37,7 @@ try:
         pqDataStream = []
 
         length = serverproxySocket.recv(4096)
-        length = length.decode("utf-8")
+        length = int(str(length, "utf8"))
         print(length)
         print(type(length))
 
