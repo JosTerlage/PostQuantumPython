@@ -33,6 +33,7 @@ try:
         serverproxyPK = pickle.loads(pqDataStream)
         #serverproxyPK = serverproxyPK.decode("utf-8")
         print(serverproxyPK)
+        print(type(serverproxyPK))
 
         #Generate AES key
         aesKey = "000102030405060708090a0b0c0d0e0f1011121314151617"
