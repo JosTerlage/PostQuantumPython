@@ -34,6 +34,7 @@ while True:
 
     #Send Post Quantum Public key to clientproxy
     pqDataStream = pickle.dumps(serverproxyPublickey)
+    print(str(len(pqDataStream)))
     clientproxySocket.send(str(len(pqDataStream)).encode("utf8"))
     clientproxySocket.send(pqDataStream)
     #clientproxySocket.send(b'00000001')
