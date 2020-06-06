@@ -1,5 +1,6 @@
 import socket
 import pickle
+import functools
 
 from poc import MiniKyber, Kyber, Nose, Skipper2Negated, Skipper4, BinomialDistribution
 from sage.crypto.mq.rijndael_gf import RijndaelGF
@@ -14,31 +15,44 @@ clientSideSocket.listen(5)
 clientsocket, address = clientSideSocket.accept()
 print("Connection has been established")
 
-HEADERSIZE = 10
-
+def tobits(s):
+    result = []
+    for c in s:
+        bits = bin(ord(c))[2:]
+        bits = '00000000'[len(bits):] + bits
+        result.extend([int(b) for b in bits])
+    return functools.reduce(lambda a,b : str(a) + str(b), result)
 
 try:
     while True:
-        serverproxyPK = ()
         msg = clientsocket.recv(1024)
         print("Message has been received")
         y = 65536
         #Connect with serverproxy 
         serverproxySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        serverproxySocket.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 65536)
+        #serverproxySocket.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 65536)
         serverproxySocket.connect(("stempoljos.westeurope.cloudapp.azure.com", 8092))
 
         #Wait for PK from server
-        pqDataStream = serverproxySocket.recv(y)
+        pqDataStream = []
+
+        while True:
+            packet = serverproxySocket.recv(4096)
+            #print(packet)
+            if not packet: break
+            pqDataStream.append(packet)
+        
+        #pqDataStream = serverproxySocket.recv(y)
         print(pqDataStream)
-        serverproxyPK = pickle.loads(pqDataStream)
+        serverproxyPK = pickle.loads(b"".join(pqDataStream))
         #serverproxyPK = serverproxyPK.decode("utf-8")
         print(serverproxyPK)
         print(type(serverproxyPK))
 
         #Generate AES key
         aesKey = "000102030405060708090a0b0c0d0e0f1011121314151617"
-
+        aesKey = tobits(aesKey)
+        
         #Generate Post Quantum Keys
         clientproxyPublickey, clientproxyPrivatekey = Kyber.key_gen()
 

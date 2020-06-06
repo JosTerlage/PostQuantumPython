@@ -14,6 +14,13 @@ serverproxySocket.listen(5)
 serversideSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serversideSocket.connect((socket.gethostname(), 8094))
 
+def frombits(bits):
+    chars = [int(char) for char in bits]
+    for b in range(int(len(chars) / 8)):
+        byte = chars[b*8:(b+1)*8]
+        chars.append(chr(int(''.join([str(bit) for bit in byte]), 2)))
+    return ''.join([str(char) for char in chars])
+
 while True:
     #Establish connection with clientproxy
     clientproxySocket, address = serverproxySocket.accept()
@@ -32,6 +39,7 @@ while True:
     #Wait for Post Quantum encrypted AES key and decrypt
     aesKey = clientproxySocket.recv(1024)
     aesKey = Kyber.dec(serverproxyPrivatekey, c=aesKey)
+    aesKey = frombits(aesKey)
 
     #Wait for message encrypted with AES and decrypt   
     msg = clientproxySocket.recv(1024)
