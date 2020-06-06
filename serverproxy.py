@@ -6,8 +6,6 @@ from sage.crypto.mq.rijndael_gf import RijndaelGF
 
 rgf = RijndaelGF(4, 6)
 
-HEADERSIZE = 10
-
 #Init sockets
 serverproxySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serverproxySocket.bind((socket.gethostname(), 8092))
@@ -27,8 +25,7 @@ while True:
 
     #Send Post Quantum Public key to clientproxy
     pqDataStream = pickle.dump(serverproxyPublickey)
-    pqDataStream = bytes(f"{len(pqDataStream):<{HEADERSIZE}}", 'utf-8')+pqDataStream
-    clientproxySocket.send(bytes(pqDataStream))
+    clientproxySocket.send(pqDataStream)
 
     #Wait for Post Quantum encrypted AES key and decrypt
     aesKey = clientproxySocket.recv(1024)
