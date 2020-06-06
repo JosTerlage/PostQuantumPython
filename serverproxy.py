@@ -20,7 +20,9 @@ while True:
     print("Tunnel has been established")
 
     #Generate Post Quantum Keypair
-    serverproxyPublickey, serverproxyPrivatekey = Kyber.key_gen()
+    #serverproxyPublickey, serverproxyPrivatekey = Kyber.key_gen()
+    serverproxyPublickey = ("apple", "banana", "cherry")
+    serverproxyPrivatekey = ()
     #print (serverproxyPublickey)
 
     #Send Post Quantum Public key to clientproxy
