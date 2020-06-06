@@ -29,7 +29,7 @@ try:
 
         #Wait for PK from server
         pqDataStream = serverproxySocket.recv(y)
-        serverproxyPK = pickle.load(pqDataStream)
+        serverproxyPK = pickle.loads(pqDataStream)
         #serverproxyPK = serverproxyPK.decode("utf-8")
         print(serverproxyPK)
 
