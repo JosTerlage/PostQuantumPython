@@ -26,7 +26,7 @@ def frombits(bits):
 def decodePacket(packet):
     try:
         return packet.decode("utf-8")
-    except TypeError:
+    except UnicodeDecodeError:
         return ""  
 
 
