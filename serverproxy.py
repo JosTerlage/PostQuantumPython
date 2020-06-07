@@ -44,10 +44,10 @@ while True:
     """
 
     #Hardcoded the PQ Keys because sending them over the line caused too much trouble
-    with open('/home/client/Desktop/Python code/hardCodedPK.txt', 'rb') as file_object:
+    with open('/root/git/PostQuantumPython/hardCodedPK.txt', 'rb') as file_object:
         serverproxyHardcodedPK = pickle.load(file_object)
 
-    with open('/home/client/Desktop/Python code/hardCodedSK.txt', 'rb') as file_object:
+    with open('/root/git/PostQuantumPython/hardCodedSK.txt', 'rb') as file_object:
         serverproxyHardcodedSK = pickle.load(file_object)
 
 
