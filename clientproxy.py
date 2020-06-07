@@ -88,6 +88,7 @@ try:
 
         print(len(pickledAESKey))
         pickledAESKeylen = len(pickledAESKey)
+        pickledAESKeylen = str(pickledAESKeylen)
         serverproxySocket.send(bytes(pickledAESKeylen, "utf-8"))
         serverproxySocket.send(pickledAESKey)
 
