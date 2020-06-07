@@ -83,8 +83,9 @@ try:
         pickledAESKey = pickle.dumps(encryptedAesKey)
 
         print("Pickled AESKey dumped")
+        print(type(pickledAESKey))
 
-        serverproxySocket.send(bytes(pickledAESKey, "utf-8"))
+        serverproxySocket.send(pickledAESKey)
 
         print("Pickled AESKey sent")
 
