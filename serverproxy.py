@@ -71,7 +71,7 @@ while True:
     totallen = int(totallen.decode("utf-8"))
     bytesRead = 0
 
-    while bytesRead <= totallen:
+    while bytesRead < totallen:
         print("bytesread: ")
         print(bytesRead)
         packet = clientproxySocket.recv(8192)
