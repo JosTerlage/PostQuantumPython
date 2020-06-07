@@ -86,6 +86,8 @@ while True:
     aesKey = Kyber.dec(serverproxyHardcodedSK, c=aesKey)
     aesKey = frombits(aesKey)
 
+    print("AESKey decoded")
+
     #Wait for message encrypted with AES and decrypt   
     msg = clientproxySocket.recv(1024)
     msg = rgf.decrypt(msg, aesKey)

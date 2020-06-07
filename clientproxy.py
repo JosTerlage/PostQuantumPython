@@ -98,7 +98,7 @@ try:
 
 
         #send message to serverproxy with AES
-        aesEncryptedMsg = rgf.encrypt(msg, aesKey)
+        #aesEncryptedMsg = rgf.encrypt(msg, aesKey)
         #serverproxySocket.send(bytes(aesEncryptedMsg))
 
         #listen for response and decrypt with AES key
