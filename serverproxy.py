@@ -69,10 +69,10 @@ while True:
     while True:
         packet = clientproxySocket.recv(8192)
         #print("packet type = ")
-        print(packet)
+        #print(packet)
         decoded = decodePacket(packet)
         print(decoded)
-        if decoded == "EOS": 
+        if decoded != "": 
             print("EOS Found")
             break
         pqDataStream.extend(packet)
