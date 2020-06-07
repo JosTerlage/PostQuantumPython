@@ -49,7 +49,8 @@ while True:
 
     with open('/root/git/PostQuantumPython/hardCodedSK.txt', 'rb') as file_object:
         serverproxyHardcodedSK = pickle.load(file_object)
-
+    
+    print(type(serverproxyHardcodedSK))
 
 
     #Wait for Post Quantum encrypted AES key and decrypt
