@@ -72,7 +72,8 @@ while True:
     bytesRead = 0
 
     while bytesRead <= totallen:
-        print("bytesread: " + bytesRead)
+        print("bytesread: ")
+        print(bytesRead)
         packet = clientproxySocket.recv(8192)
         print("packet len: ")
         print(len(packet))
