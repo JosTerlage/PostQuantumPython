@@ -75,7 +75,7 @@ while True:
         if decoded == "EOS": 
             print("EOS Found")
             break
-        pqDataStream.append(packet)
+        pqDataStream.extend(packet)
     
     #print("pqDataStream type = " + type(pqDataStream))
     
