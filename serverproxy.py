@@ -68,7 +68,8 @@ while True:
 
     while True:
         packet = clientproxySocket.recv(1024)
-        print("packet type = " + type(packet))
+        print("packet type = ")
+        print(type(packet))
         decoded = decodePacket(packet)
         print(decoded)
         if decoded == "EOS": 
