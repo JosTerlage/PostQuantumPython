@@ -22,6 +22,14 @@ def frombits(bits):
         chars.append(chr(int(''.join([str(bit) for bit in byte]), 2)))
     return ''.join([str(char) for char in chars])
 
+
+def decodePacket(packet):
+    try:
+        return packet.decode("utf-8")
+    except TypeError:
+        return ""  
+
+
 while True:
     #Establish connection with clientproxy
     clientproxySocket, address = serverproxySocket.accept()
@@ -61,12 +69,7 @@ while True:
     while True:
         packet = clientproxySocket.recv(1024)
         #print("packet type = " + type(packet))
-        
-        try:
-            decoded = packet.decode("utf-8")
-        except TypeError:
-            decoded = ""    
-        
+        decoded = decodePacket(packet)
         print(decoded)
         if decoded == "EOS": 
             print("EOS Found")
