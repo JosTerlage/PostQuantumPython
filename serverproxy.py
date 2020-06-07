@@ -67,16 +67,27 @@ while True:
     #Wait for Post Quantum encrypted AES key and decrypt
     pqDataStream = bytearray()
 
-    while True:
+    totallen = clientproxySocket.recv(1024)
+    totallen = int(totallen.decode("utf-8"))
+    bytesRead = 0
+
+    while bytesRead <= totallen:
         packet = clientproxySocket.recv(8192)
-        #print("packet type = ")
-        print(len(packet))
-        decoded = decodePacket(packet)
-        print(decoded)
-        if decoded != "": 
-            print("EOS Found")
-            break
         pqDataStream.extend(packet)
+        bytesRead += len(packet)
+
+
+
+    # while True:
+    #     packet = clientproxySocket.recv(8192)
+    #     #print("packet type = ")
+    #     print(len(packet))
+    #     decoded = decodePacket(packet)
+    #     print(decoded)
+    #     if decoded != "": 
+    #         print("EOS Found")
+    #         break
+    #     pqDataStream.extend(packet)
     
     #print("pqDataStream type = " + type(pqDataStream))
     

@@ -1,6 +1,7 @@
 import socket
 import pickle
 import functools
+import time
 
 from poc import MiniKyber, Kyber, Nose, Skipper2Negated, Skipper4, BinomialDistribution
 from sage.crypto.mq.rijndael_gf import RijndaelGF
@@ -78,7 +79,7 @@ try:
 
         #Encrypt AES with Post Quantum PK from server and send to serverproxy
         encryptedAesKey = Kyber.enc(serverproxyPK, m=aesKey)
-        print(encryptedAesKey)
+        #print(encryptedAesKey)
 
         pickledAESKey = pickle.dumps(encryptedAesKey)
 
@@ -86,11 +87,15 @@ try:
         print(type(pickledAESKey))
 
         print(len(pickledAESKey))
+        pickledAESKeylen = len(pickledAESKey)
+        serverproxySocket.send(bytes(pickledAESKeylen, "utf-8"))
         serverproxySocket.send(pickledAESKey)
 
         print("Pickled AESKey sent")
 
-        serverproxySocket.send(bytes("EOS", "utf-8"))
+        #time.sleep(10)
+
+        #serverproxySocket.send(bytes("EOS", "utf-8"))
 
         print("EOS sent")
 
