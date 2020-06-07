@@ -105,7 +105,7 @@ while True:
 
     #Wait for message encrypted with AES and decrypt   
     msg = clientproxySocket.recv(1024)
-    msg = rgf.decrypt(msg, aesKey)
+    #msg = rgf.decrypt(msg, aesKey)
 
     #send message to serverside
     serversideSocket.send(bytes(msg))
@@ -114,8 +114,8 @@ while True:
     response = serversideSocket.recv(1024)
 
     #Encrypt response with AES key and send to clientproxy
-    encryptedresponse = rgf.encrypt(response, aesKey)
-    clientproxySocket.send(bytes(encryptedresponse))
+    #encryptedresponse = rgf.encrypt(response, aesKey)
+    clientproxySocket.send(bytes(response))
     clientproxySocket.close()
 
     
