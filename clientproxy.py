@@ -106,11 +106,13 @@ try:
         #send message to serverproxy (not with AES, unable to implement with my knowledge/time)
         #aesEncryptedMsg = rgf.encrypt(msg, aesKey)
         serverproxySocket.send(bytes(msg))
+        print("msg sent")
 
         #listen for response and decrypt with AES key
         response = serverproxySocket.recv(1024)
         #response = rgf.decrypt(response, aesKey)
         clientsocket.send(bytes(response))
+        print("response sent")
 
 
         serverproxySocket.close()

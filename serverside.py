@@ -18,6 +18,7 @@ while True:
     
     #Send response back to serverproxy
     serverproxySocket.send(bytes(response, "utf-8"))
+    print("response sent to proxy")
 
 serverproxySocket.close()
 serversideSocket.close()
