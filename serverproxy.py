@@ -68,6 +68,7 @@ while True:
     pqDataStream = bytearray()
 
     totallen = clientproxySocket.recv(128)
+    clientproxySocket.send(bytes("ping", "utf-8"))
     totallen = int(totallen.decode("utf-8"))
     bytesRead = 0
 

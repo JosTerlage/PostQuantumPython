@@ -90,6 +90,7 @@ try:
         pickledAESKeylen = len(pickledAESKey)
         pickledAESKeylen = str(pickledAESKeylen)
         serverproxySocket.send(bytes(pickledAESKeylen, "utf-8"))
+        serverproxySocket.recv(1024)
         serverproxySocket.send(pickledAESKey)
 
         print("Pickled AESKey sent")
@@ -101,7 +102,7 @@ try:
         print("EOS sent")
 
 
-        time.sleep(4)
+        #time.sleep(4)
 
         #send message to serverproxy (not with AES, unable to implement with my knowledge/time)
         #aesEncryptedMsg = rgf.encrypt(msg, aesKey)
