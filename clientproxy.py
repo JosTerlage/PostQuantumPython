@@ -100,7 +100,7 @@ try:
         #serverproxySocket.send(bytes("EOS", "utf-8"))
 
         print("EOS sent")
-
+        serverproxySocket.recv(1024)
 
         #time.sleep(4)
 

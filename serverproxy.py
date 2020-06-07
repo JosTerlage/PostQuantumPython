@@ -81,7 +81,7 @@ while True:
         pqDataStream.extend(packet)
         bytesRead += len(packet)
 
-
+    clientproxySocket.send(bytes("ping", "utf-8"))
 
     # while True:
     #     packet = clientproxySocket.recv(8192)
@@ -103,6 +103,8 @@ while True:
     aesKey = frombits(aesKey)
 
     print("AESKey decoded")
+
+
 
     #Wait for message encrypted with AES and decrypt   
     msg = clientproxySocket.recv(1024)
