@@ -58,11 +58,16 @@ try:
         #serverproxyPK = serverproxyPK.decode("utf-8")
         print(serverproxyPK)
         print(type(serverproxyPK))
+        
+        
         """
+
 
         #Hardcoded the PQ Keys because sending them over the line caused too much trouble
         with open('/home/client/Desktop/Python code/hardCodedPK.txt', 'rb') as file_object:
             serverproxyPK = pickle.load(file_object)
+
+
 
         #Generate AES key
         aesKey = "000102030405060708090a0b0c0d0e0f1011121314151617"
@@ -73,7 +78,19 @@ try:
 
         #Encrypt AES with Post Quantum PK from server and send to serverproxy
         encryptedAesKey = Kyber.enc(serverproxyPK, m=aesKey)
-        serverproxySocket.send(bytes(encryptedAesKey))
+        print(type(encryptedAesKey))
+
+        pickledAESKey = pickle.dumps(encryptedAesKey)
+
+        print("Pickled AESKey dumped")
+
+        serverproxySocket.send(bytes(pickledAESKey, "utf-8"))
+
+        print("Pickled AESKey sent")
+
+        serverproxySocket.send(bytes("EOS", "utf-8"))
+
+        print("EOS sent")
 
         #send message to serverproxy with AES
         aesEncryptedMsg = rgf.encrypt(msg, aesKey)

@@ -6,6 +6,7 @@ from sage.crypto.mq.rijndael_gf import RijndaelGF
 
 rgf = RijndaelGF(4, 6)
 
+
 #Init sockets
 serverproxySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 serverproxySocket.bind((socket.gethostname(), 8092))
@@ -43,6 +44,7 @@ while True:
     #clientproxySocket.send(b'00000001')
     """
 
+    
     #Hardcoded the PQ Keys because sending them over the line caused too much trouble
     with open('/root/git/PostQuantumPython/hardCodedPK.txt', 'rb') as file_object:
         serverproxyHardcodedPK = pickle.load(file_object)
@@ -54,7 +56,23 @@ while True:
 
 
     #Wait for Post Quantum encrypted AES key and decrypt
-    aesKey = clientproxySocket.recv(1024)
+    pqDataStream = ""
+
+    while True:
+        packet = clientproxySocket.recv(1024)
+        print("packet type = " + type(packet))
+        decoded = packet.decode("utf-8")
+        print(decoded)
+        if decoded == "EOS": 
+            print("EOS Found")
+            break
+        pqDataStream += decoded
+    
+    print("pqDataStream type = " + type(pqDataStream))
+    
+    
+    #aesKey = clientproxySocket.recv(1024)
+    aesKey = pickle.loads(pqDataStream)
     aesKey = Kyber.dec(serverproxyHardcodedSK, c=aesKey)
     aesKey = frombits(aesKey)
 
