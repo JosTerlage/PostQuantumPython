@@ -34,6 +34,9 @@ try:
         #serverproxySocket.setsockopt(socket.SOL_SOCKET, socket.SO_SNDBUF, 65536)
         serverproxySocket.connect(("stempoljos.westeurope.cloudapp.azure.com", 8092))
 
+
+
+        """
         #Wait for PK from server
         pqDataStream = []
 
@@ -55,6 +58,11 @@ try:
         #serverproxyPK = serverproxyPK.decode("utf-8")
         print(serverproxyPK)
         print(type(serverproxyPK))
+        """
+
+        #Hardcoded the PQ Keys because sending them over the line caused too much trouble
+        with open('/home/client/Desktop/Python code/hardCodedPK.txt', 'rb') as file_object:
+            serverproxyPK = pickle.load(file_object)
 
         #Generate AES key
         aesKey = "000102030405060708090a0b0c0d0e0f1011121314151617"

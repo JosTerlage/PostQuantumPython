@@ -32,6 +32,8 @@ while True:
     serverproxyPublickey, serverproxyPrivatekey = Kyber.key_gen()
     #print (serverproxyPublickey)
 
+    
+    """
     #Send Post Quantum Public key to clientproxy
     pqDataStream = pickle.dumps(serverproxyPublickey)
     print(pickle.dumps(serverproxyPublickey))
@@ -39,11 +41,20 @@ while True:
     #clientproxySocket.send(str(len(pqDataStream)).encode("utf8"))
     clientproxySocket.send(pqDataStream)
     #clientproxySocket.send(b'00000001')
+    """
+
+    #Hardcoded the PQ Keys because sending them over the line caused too much trouble
+    with open('/home/client/Desktop/Python code/hardCodedPK.txt', 'rb') as file_object:
+        serverproxyHardcodedPK = pickle.load(file_object)
+
+    with open('/home/client/Desktop/Python code/hardCodedSK.txt', 'rb') as file_object:
+        serverproxyHardcodedSK = pickle.load(file_object)
+
 
 
     #Wait for Post Quantum encrypted AES key and decrypt
     aesKey = clientproxySocket.recv(1024)
-    aesKey = Kyber.dec(serverproxyPrivatekey, c=aesKey)
+    aesKey = Kyber.dec(serverproxyHardcodedSK, c=aesKey)
     aesKey = frombits(aesKey)
 
     #Wait for message encrypted with AES and decrypt   
