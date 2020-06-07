@@ -71,7 +71,7 @@ while True:
         #print("packet type = ")
         #print(packet)
         decoded = decodePacket(packet)
-        print(decoded)
+        #print(decoded)
         if decoded != "": 
             print("EOS Found")
             break
