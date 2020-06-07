@@ -69,7 +69,7 @@ while True:
     while True:
         packet = clientproxySocket.recv(8192)
         #print("packet type = ")
-        #print(packet)
+        print(len(packet))
         decoded = decodePacket(packet)
         #print(decoded)
         if decoded != "": 
