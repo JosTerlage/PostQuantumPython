@@ -101,7 +101,7 @@ try:
         print("EOS sent")
 
 
-
+        time.sleep(4)
 
         #send message to serverproxy (not with AES, unable to implement with my knowledge/time)
         #aesEncryptedMsg = rgf.encrypt(msg, aesKey)

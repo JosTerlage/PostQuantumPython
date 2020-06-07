@@ -67,7 +67,7 @@ while True:
     #Wait for Post Quantum encrypted AES key and decrypt
     pqDataStream = bytearray()
 
-    totallen = clientproxySocket.recv(1024)
+    totallen = clientproxySocket.recv(128)
     totallen = int(totallen.decode("utf-8"))
     bytesRead = 0
 
