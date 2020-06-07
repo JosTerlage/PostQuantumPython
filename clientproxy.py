@@ -93,6 +93,8 @@ try:
 
         print("EOS sent")
 
+        
+
         #send message to serverproxy with AES
         aesEncryptedMsg = rgf.encrypt(msg, aesKey)
         serverproxySocket.send(bytes(aesEncryptedMsg))

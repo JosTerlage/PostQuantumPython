@@ -67,7 +67,7 @@ while True:
     pqDataStream = bytearray()
 
     while True:
-        packet = clientproxySocket.recv(1024)
+        packet = clientproxySocket.recv(65536)
         print("packet type = ")
         print(type(packet))
         decoded = decodePacket(packet)
