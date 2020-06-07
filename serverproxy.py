@@ -67,9 +67,9 @@ while True:
     pqDataStream = bytearray()
 
     while True:
-        packet = clientproxySocket.recv(65536)
-        print("packet type = ")
-        print(type(packet))
+        packet = clientproxySocket.recv(8192)
+        #print("packet type = ")
+        print(packet)
         decoded = decodePacket(packet)
         print(decoded)
         if decoded == "EOS": 

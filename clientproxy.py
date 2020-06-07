@@ -78,13 +78,14 @@ try:
 
         #Encrypt AES with Post Quantum PK from server and send to serverproxy
         encryptedAesKey = Kyber.enc(serverproxyPK, m=aesKey)
-        print(type(encryptedAesKey))
+        print(encryptedAesKey)
 
         pickledAESKey = pickle.dumps(encryptedAesKey)
 
         print("Pickled AESKey dumped")
         print(type(pickledAESKey))
 
+        print(len(pickledAESKey))
         serverproxySocket.send(pickledAESKey)
 
         print("Pickled AESKey sent")
@@ -93,11 +94,12 @@ try:
 
         print("EOS sent")
 
-        
+
+
 
         #send message to serverproxy with AES
         aesEncryptedMsg = rgf.encrypt(msg, aesKey)
-        serverproxySocket.send(bytes(aesEncryptedMsg))
+        #serverproxySocket.send(bytes(aesEncryptedMsg))
 
         #listen for response and decrypt with AES key
         response = serverproxySocket.recv(1024)
